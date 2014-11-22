@@ -1,0 +1,293 @@
+% 24 Jan 2012  
+% 22 Jan 2012  
+
+
+% Test of package screenread.sty that gives a layout suitable for
+%    screen reading.  It is based on ideas in
+%  B. Veytsman amd M. Ware, Tugboat 32 (2011) 261.
+
+
+\documentclass{article}
+\usepackage{lipsum}
+\usepackage{url}
+
+\usepackage{screenread}
+
+%-----------
+
+\providecommand{\eqdef}{\stackrel{\textrm{def}}{=}}
+
+%-----------
+
+\newif\ifscreen
+\makeatletter
+  \@ifpackageloaded{screenread}{\screentrue}{\screenfalse}
+\makeatother
+
+\title{Test of package \texttt{screenread.sty}
+          \\
+          \ifscreen
+            (Document suitable for screen reading)
+          \else
+            (Document suitable for printing)
+          \fi
+   }
+\author{John Collins}
+\date{24 January 2012}
+
+
+%===========================================
+
+\begin {document}
+\maketitle
+
+\begin{abstract}
+This document exercises the package \texttt{screenread.sty}.
+First, it stress tests footnote handling with enormous footnotes, and
+then shows the content of a handout from a physics course.
+\end{abstract}
+
+\section{Stress test for footnotes}
+
+Here is some text:
+\begin{quotation}
+  \lipsum[6-20]
+\end{quotation}
+It should also appear in the following extremely long footnotes
+\footnote{\lipsum[6-10]}
+and
+\footnote{\lipsum[11-20]}
+
+\lipsum[1]
+
+\pagebreak
+After a manual page break
+\lipsum[2]
+
+
+%============================================================
+\pageBreakSection{Summary of work on standard quantization}
+
+\url{http://wikipedia.org/physics}
+
+There are standard rules of canonical quantization to convert systems
+described by a Lagrangian formalism to quantum mechanics.  The rules
+are \emph{stated} in standard textbooks.  However, it is important to
+know not only what the rules are but also \emph{why} they are what
+they are, in order to deal with new situations, for example
+Lagrangians linear in time derivatives of the generalized coordinates,
+and, importantly for many people here, gravity.
+
+The standard rules were set up in the founding papers of quantum
+mechanics, in the context of ordinary systems in Newtonian mechanics,
+with a Lagrangian quadratic in time derivatives.  If you are
+interested in the rules for getting a quantum theory from a
+Lagrangian, the founding papers of quantum mechanics 
+are important because they do
+not merely state the rules; they also so strongly motivate the canonical
+quantization rules that the rules can almost be regarded as proved from
+more elementary considerations, provided that you stay in the context
+of the systems to which they are applied.  The key papers are as
+follows:
+\begin{itemize}
+\item Heisenberg \cite{Heisenberg} started out the subject, and
+  inspired the next papers.
+\item Born and Jordan \cite{Born.Jordan} worked out the rules.  Their
+  paper includes a treatment of the electromagnetic field.
+\item Dirac \cite{Dirac} independently worked out the rules.
+\item Born, Heisenberg, and Jordan \cite{Born.Heisenberg.Jordan} gave
+  a complete formulation.
+\end{itemize}
+
+All the above papers (translated into English when the originals are
+in German) are to be found in van der Waerden's book \cite{Waerden}.
+But note that the translation of the Born and Jordan paper omits the
+section on quantum fields.  I have made a translation of the missing
+section available at
+\url{http://www.phys.psu.edu/~collins/564/born_jordan.pdf}.
+
+%=======
+
+\pageBreakSection{Another section}
+with some words for efekt
+
+%============================================================
+\pageBreakSection{First-order Lagrangians}
+
+\subsection{Literature}
+As for Lagrangians linear in time derivatives, key papers relevant to
+the methods we will use in this course are as follows:
+\begin{itemize}
+\item Floreanini and Jackiw \cite{Floreanini.Jackiw} stated the
+  rules. 
+\item Costa and Girotti \cite{Costa.Girotti} argued that the previous
+  paper should have used constrained quantization and showed how to do
+  it.
+\item Faddeev and Jackiw \cite{Faddeev.Jackiw} rebut Costa and
+  Girotti, with a more detailed explanation of why you do not need
+  Dirac's constrained quantization to deal with this case.
+\end{itemize}
+
+Another method that is frequently quoted in this context, but that is
+considerably more complicated is Dirac's method of constrained
+quantization, for which a standard reference is in a little book by
+Dirac \cite{Dirac.constrained}.  For a detailed treatment of
+constrained quantization, in the context of $(2+1)$ and $(3+1)$
+gravity, see \cite{Romano}.  Although the main aim of this reference
+concerns applications to general relativity, it also has a simple
+example treated at its Eq.\ (2.11).
+
+In this course I will use the Floreanini-Faddeev-Jackiw method,
+because it is very much simpler and easier.
+
+
+
+
+\subsection{Formulation}
+The rules are stated by Floreanini and Jackiw \cite{Floreanini.Jackiw}
+and in more detail by Faddeev and Jackiw \cite{Faddeev.Jackiw}.
+
+\paragraph{Specification of system}
+We work with a Lagrangian that is of \emph{first} order in time
+derivatives, rather than second order, which is the usual case.  The
+coordinates are even in number, collectively denoted as $\underline{q}
+= (q^1, q^2, \dots, q^{2N})$, and the Lagrangian is of the form
+\begin{equation}
+\label{eq.L1}
+  L = \frac{1}{2} \sum_{j,k} q^j f_{jk} \dot{q}^k - F(\underline{q}).
+\end{equation}
+Here $f$ is an invertible \emph{anti}symmetric\footnote{Note that by
+  adding a time derivative, other forms may be obtained, e.g.,
+  $q^1\dot{q}^2$ instead of $\frac{1}{2}(q^1\dot{q}^2-q^2\dot{q}^1)$.
+  Such changes do not affect the equations of motion or the
+  Hamiltonian.  But the form (\ref{eq.L1}) is the most symmetric, so
+  we will take it as the canonical one.} numerical matrix,
+$f_{jk}=-f_{kj}$, and $F(\underline{q})$ is some function of the
+coordinates.  Thus $F$ appears to be like the potential in the usual
+second-order Lagrangians of classical mechanics etc.
+
+\paragraph{Euler-Lagrange equations and Hamiltonian}
+There is \emph{exactly} no change from the usual case
+either in the form of the Euler-Lagrange equations,
+\begin{equation}
+  \label{eq:E-L}
+  0 = \frac{d}{dt} \frac{\partial L}{\partial \dot{q}^j} - \frac{\partial L}{\partial q^j},
+\end{equation}
+or in the definition of the Hamiltonian,
+\begin{equation}
+  \label{eq:H}
+  H(\underline{q})
+  \eqdef \sum_j \frac{\partial L}{\partial \dot{q}^j} \dot{q}^j - L
+  = F(\underline{q}).
+\end{equation}
+Thus $H$ is the Noether charge for time-translation invariance.  
+
+\paragraph{Equal-time canonical commutation relations}
+The equal-time canonical commutation relations (ETCCR) between the
+$q^j$s are to be such that the ordinary Heisenberg equation of motion
+in the quantum theory,
+\begin{equation}
+  \label{eq:e.of.m}
+  i \hbar \frac{dq^j(t)}{dt} = [q^j(t), H],
+\end{equation}
+agree with the Euler-Lagrange equations Eq.\ (\ref{eq:E-L}).  We do
+this by imposing
+\begin{equation}
+  \label{eq:ETCCR}
+  [q^j(t), q^k(t)] = i \hbar (f^{-1})^{jk} .
+\end{equation}
+Here $f^{-1}$ is defined to obey $\sum_k (f^{-1})^{jk} f_{kl} = \delta^j_l$.
+These commutation relations comprise the only changes compared with
+the usual case.  \textbf{You should verify that} the Euler-Lagrange
+equations of motion and the Heisenberg equations of motion agree, up
+to operator ordering issues.  It is particularly important to check
+the sign of the ETCCR.
+
+
+\paragraph{Canonical momenta}
+The above formulation has bypassed a definition of canonical momenta.
+We can obtain them by modifying the usual definition to
+\begin{equation}
+  \label{eq:mom}
+  p_j \eqdef 2 \frac{\partial L}{\partial \dot{q}^j} = \sum_k q^k f_{kj}.
+\end{equation}
+Then we use just the usual formula for the ETCCR to
+\begin{equation}
+  \label{eq:ETCCR.qp}
+  [q^k(t), p_j(t)] = i \hbar \delta^k_j
+\end{equation}
+in order to reproduce Eq.\ (\ref{eq:ETCCR}).  We must also ignore the
+usual formulae for the ETCCR for the $p_j$s with themselves and for
+the $q^j$s with themselves; the relevant formulae are derivable from
+Eq.\ (\ref{eq:ETCCR}) since the $p_j$s are determined by the $q^j$s.
+
+An alternative \emph{choice} is to define the $p_j$s without the
+factor of two on the right of Eq.\ (\ref{eq:mom}); then a factor of
+$1/2$ is inserted on the right of Eq.\ (\ref{eq:ETCCR.qp}).
+
+But these are both mere definitions.  Since the momenta are uniquely
+determined by the coordinates, it is probably best to avoid the
+concept of canonical momenta for these systems, and just to impose
+Eq.\ (\ref{eq:ETCCR}) directly on the $q^j$s.  In the usual case, we
+need both the $q^j$s and the $p_j$s to specify the state of a
+classical system at a particular time.  In the case of a first-order
+Lagrangian only the coordinates are needed.
+
+\paragraph{Mixed first- and second-order Lagrangians}
+It is left as an exercise to work out the formalism for a Lagrangian
+which has only first-order terms for some of the velocities
+$\dot{q}^j$, and second-order terms for the others.
+
+
+\paragraph{Relation to Dirac constrained quantization}
+Seriously interested students might find it interesting to understand
+the relation between the above formalism and the Dirac formalism for
+constrained quantization \cite{Dirac.constrained,Henneaux.Teitelboim}.
+
+
+%============================================================
+
+\begin{thebibliography}{99}
+
+\bibitem{Heisenberg} W. Heisenberg, ``Quantum-theoretical
+  re-interpretation of kinematic and mechanical relations'', Zeit.\
+  f.\ Phys.\ \textbf{33} 879--893 (1925).
+
+\bibitem{Born.Jordan} M. Born and P. Jordan, ``On quantum mechanics'',
+  Zeit.\ f.\ Phys.\ \textbf{34}, 858--888 (1925).
+
+\bibitem{Dirac} P.A.M. Dirac, ``The fundamental equations of quantum
+  mechanics'', Proc.\ Roy.\ Soc.\ A \textbf{109}, 642--653 (1926).
+
+\bibitem{Born.Heisenberg.Jordan} M. Born, W. Heisenberg and P. Jordan,
+  ``On quantum mechanics II'', Zeit.\ f.\ Phys.\ \textbf{35}, 557--615
+  (1926).
+
+\bibitem{Waerden} B.L. van der Waerden, ``Sources of quantum
+  mechanics'' (Dover, 1968) QC174.1.W3 1968 in the PSU library.
+
+\bibitem{Dirac.constrained} P.A.M. Dirac ``Lectures on Quantum
+  Mechanics'' (Yeshiva University, New York, 1964).
+
+\bibitem{Floreanini.Jackiw} R. Floreanini and R. Jackiw, Phys.\ Rev.\
+  Lett.\ \textbf{59}, 1873 (1987).
+
+\bibitem{Costa.Girotti} M.E.V. Costa and H.O. Girotti, Phys.\ Rev.\
+  Lett.\ \textbf{60}, 1771 (1988).
+
+\bibitem{Faddeev.Jackiw} L.D. Faddeev and R. Jackiw, Phys.\ Rev.\
+  Lett.\ \textbf{60}, 1692 (1988).
+
+\bibitem{Romano} J.D. Romano, ``Geometrodynamics vs.\ connection
+  dynamics'', Gen.\ Rel.\ Grav.\ {\bf 25}, 759 (1993)
+  [arXiv:gr-qc/9303032]
+
+\bibitem{Henneaux.Teitelboim} M. Henneaux and C. Teitelboim,
+  ``Quantization of gauge systems'' (Princeton University Press,
+  1992).
+  \footnote{A test footnote, to check that it is correctly treated at
+    the end of the document.}
+
+\end{thebibliography}
+
+\end {document}
